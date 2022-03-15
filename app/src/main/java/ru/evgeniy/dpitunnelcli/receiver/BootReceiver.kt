@@ -48,6 +48,8 @@ class BootReceiver: BroadcastReceiver() {
                     }
                     if (isStarted)
                         proxyUseCase.set("127.0.0.1", settingsUseCase.getPort() ?: Constants.DPITUNNEL_DEFAULT_PORT)
+                    else
+                        proxyUseCase.unset()
                 }
             }
         }
