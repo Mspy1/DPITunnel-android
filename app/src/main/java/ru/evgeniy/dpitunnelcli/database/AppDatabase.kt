@@ -36,11 +36,13 @@ abstract class AppDatabase : RoomDatabase() {
                         }
                     })
                     .build()
+                INSTANCE!!.query("select 1", null)
+
                 return INSTANCE as AppDatabase
             }
         }
 
-        private fun prepopulateDb(db: AppDatabase) = CoroutineScope(Dispatchers.Default).launch {
+        private fun prepopulateDb(db: AppDatabase) = CoroutineScope(Dispatchers.IO).launch {
             db.profileDao().insertProfile(
                 Profile(
                     id = null,
