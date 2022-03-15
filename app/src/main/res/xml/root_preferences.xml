@@ -4,7 +4,7 @@
 
         <SwitchPreferenceCompat
             app:key="preference_start_on_boot"
-            app:defaultValue="true"
+            app:defaultValue="false"
             app:title="@string/preference_start_on_boot_title"
             app:summary="@string/preference_start_on_boot_summary" />
 
