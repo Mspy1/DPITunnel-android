@@ -8,7 +8,7 @@ class RenameProfileUseCase(private val context: Context): IRenameProfileUseCase 
 
     private val profileDao = AppDatabase.getInstance(context).profileDao()
 
-    override suspend fun rename(id: Int, newTitle: String) {
+    override suspend fun rename(id: Long, newTitle: String) {
         profileDao.rename(id, newTitle)
     }
 }

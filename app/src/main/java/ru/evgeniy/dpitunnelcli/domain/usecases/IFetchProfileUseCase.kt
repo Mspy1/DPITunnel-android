@@ -3,5 +3,5 @@ package ru.evgeniy.dpitunnelcli.domain.usecases
 import ru.evgeniy.dpitunnelcli.domain.entities.Profile
 
 interface IFetchProfileUseCase {
-    suspend fun fetch(id: Int): Profile?
+    suspend fun fetch(id: Long): Profile?
 }

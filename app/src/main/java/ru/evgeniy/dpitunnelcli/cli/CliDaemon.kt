@@ -26,6 +26,8 @@ class CliDaemon(private val execPath: String,
         argsStr.append(' ')
         argsStr.append(persistentOptions.toString())
         profiles.forEach {
+            if (!it.default && !it.enabled)
+                return@forEach
             argsStr.append(' ')
             argsStr.append(it.toString())
         }

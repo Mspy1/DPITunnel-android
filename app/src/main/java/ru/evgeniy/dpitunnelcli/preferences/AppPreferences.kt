@@ -37,14 +37,14 @@ class AppPreferences private  constructor() {
             return first
         }
 
-    var defaultProfileId: Int?
+    var defaultProfileId: Long?
         set(value) {
             with(sharedPreferences.edit()){
-                putInt(DEFAULT_PROFILE_ID_PROPERTY_NAME, value ?: 0)
+                putLong(DEFAULT_PROFILE_ID_PROPERTY_NAME, value ?: 0L)
                 apply()
             }
         }
-        get() = sharedPreferences.getInt(DEFAULT_PROFILE_ID_PROPERTY_NAME, 0).let { if (it == 0) null else it }
+        get() = sharedPreferences.getLong(DEFAULT_PROFILE_ID_PROPERTY_NAME, 0L).let { if (it == 0L) null else it }
 
     companion object {
         const val SETTINGS_STORAGE_NAME = "PERSISTENT_SETTINGS"

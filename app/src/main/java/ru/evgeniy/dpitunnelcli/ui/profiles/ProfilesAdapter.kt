@@ -7,6 +7,7 @@ import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.widget.PopupMenu
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.card.MaterialCardView
 import com.google.android.material.checkbox.MaterialCheckBox
 import ru.evgeniy.dpitunnelcli.R
 import ru.evgeniy.dpitunnelcli.data.usecases.FetchProfileUseCase
@@ -15,7 +16,8 @@ import ru.evgeniy.dpitunnelcli.domain.entities.Profile
 class ProfilesAdapter(val profileListener: (Profile) -> Unit,
                       val profileRenameListener: (Profile) -> Unit,
                       val profileDeleteListener: (Profile) -> Unit,
-                      val profileDefaultListener: (Profile) -> Unit): RecyclerView.Adapter<ProfileViewHolder>() {
+                      val profileDefaultListener: (Profile) -> Unit,
+                      val profileEnabledListener: (Profile) -> Unit,): RecyclerView.Adapter<ProfileViewHolder>() {
     private var profiles = listOf<Profile>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProfileViewHolder {
@@ -46,6 +48,10 @@ class ProfilesAdapter(val profileListener: (Profile) -> Unit,
                         profileDefaultListener(profiles[position])
                         true
                     }
+                    R.id.profile_item_menu_enabled -> {
+                        profileEnabledListener(profiles[position])
+                        true
+                    }
                     else -> false
                 }
             }
@@ -64,10 +70,13 @@ class ProfilesAdapter(val profileListener: (Profile) -> Unit,
 }
 
 class ProfileViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+    val card: MaterialCardView = itemView.findViewById(R.id.view_holder_profile_card)
     val title: TextView = itemView.findViewById(R.id.view_holder_profile_title)
     val options: ImageButton = itemView.findViewById(R.id.view_holder_profile_options)
 
     fun onBind(profile: Profile) {
+        card.isChecked = profile.default || profile.enabled
+
         val titleStr = StringBuilder(profile.title ?: itemView.context.getString(R.string.unnamed_profile_name))
         if (profile.default)
             titleStr.append(" ").append(itemView.context.getString(R.string.default_profile_mark))

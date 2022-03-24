@@ -1,5 +1,5 @@
 package ru.evgeniy.dpitunnelcli.domain.usecases
 
 interface IDeleteProfileUseCase {
-    suspend fun delete(id: Int)
+    suspend fun delete(id: Long)
 }

@@ -128,6 +128,12 @@ class EditProfileActivity : AppCompatActivity() {
             checkLocationPermissions()
         }
 
+        val checkboxDefault = binding.editProfileProfileIdDefault
+        checkboxDefault.setOnCheckedChangeListener { _, isChecked ->
+            editProfilesViewModel.default = isChecked
+        }
+
+        val textviewProfileIdDesc = binding.editProfileProfileIdDesc
         val edittextProfileId = binding.editProfileProfileIdEdit
         edittextProfileId.doAfterTextChanged {
             editProfilesViewModel.profileId = it.toString()
@@ -304,6 +310,19 @@ class EditProfileActivity : AppCompatActivity() {
 
         editProfilesViewModel.profile.observe(this) { profile ->
             supportActionBar?.title = profile?.title ?: getString(R.string.unnamed_profile_name)
+            checkboxDefault.isChecked = profile?.default == true
+            edittextProfileId.visibility = if (profile?.default == true)
+                View.GONE
+            else
+                View.VISIBLE
+            textviewProfileIdDesc.visibility = if (profile?.default == true)
+                View.GONE
+            else
+                View.VISIBLE
+            butSetProfileFromCurrentSettings.visibility = if (profile?.default == true)
+                View.GONE
+            else
+                View.VISIBLE
             edittextProfileId.setText(profile.name)
             spinnerZeroLevel.setSelection(profile.desyncZeroAttack?.ordinal?.plus(1) ?: 0)
             spinnerFirstLevel.setSelection(profile.desyncFirstAttack?.ordinal?.plus(1) ?: 0)
@@ -320,7 +339,7 @@ class EditProfileActivity : AppCompatActivity() {
             edittextDns.setText(profile.inBuiltDNSIP?.plus(profile.inBuiltDNSPort?.let { ":$it" } ?: "") ?: "")
         }
 
-        editProfilesViewModel.loadProfile(intent.getIntExtra(PROFILE_ID_KEY, 0))
+        editProfilesViewModel.loadProfile(intent.getLongExtra(PROFILE_ID_KEY, 0L))
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

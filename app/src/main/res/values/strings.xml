@@ -22,13 +22,16 @@
     <string name="button_restart">restart</string>
     <!-- Dashboard fragment messages -->
     <string name="no_one_profile_failed">Fail! Create at least one profile</string>
+    <!-- Dashboard fragment messages -->
+    <string name="empty_profile_name_failed">Fail! Blank profile ID</string>
 
     <!-- Profiles fragment -->
     <string name="unnamed_profile_name">Unnamed</string>
     <string name="default_profile_mark"> (Default)</string>
-    <string name="profile_item_menu_default">Default</string>
     <string name="profile_item_menu_rename">Rename</string>
     <string name="profile_item_menu_delete">Delete</string>
+    <string name="profile_item_menu_default">Default</string>
+    <string name="profile_item_menu_enabled">Use</string>
     <string name="dialog_profile_rename_positive">OK</string>
     <string name="dialog_profile_rename_negative">Cancel</string>
     <string name="dialog_profile_rename_title">Rename profile</string>
@@ -38,6 +41,7 @@
     <string name="rename_edit_profile_toolbar">Rename</string>
     <!-- Profile id card -->
     <string name="title_profile_id_card">Profile ID</string>
+    <string name="desc_default_profile_id_card">Default profile</string>
     <string name="desc_profile_id_card">Net iface/Wi-Fi AP</string>
     <string name="hint_profile_id_card">&lt;net_iface&gt;[:&lt;wifi_net&gt;]|default</string>
     <string name="button_profile_id_card">Set from current network settings</string>
@@ -92,7 +96,7 @@
     <!-- Edit profile activity messages -->
     <string name="location_permission_failed">Fail! Grant location permission to get network settings</string>
     <string name="location_disabled_failed">Fail! Enable location to get network settings</string>
-    <string name="invalid_profile_id_failed">Fail! Profile id can\'t be empty</string>
+    <string name="invalid_profile_id_failed">Fail! Profile id can\'t be empty or \'default\'</string>
     <string name="no_working_attacks_found">Fail! No working attack found</string>
     <string name="resolve_domain_failed">Fail! Resolve domain failed. Is website address correct?</string>
     <string name="config_parse_failed">Fail! Failed to parse output of binary. Contact developer</string>

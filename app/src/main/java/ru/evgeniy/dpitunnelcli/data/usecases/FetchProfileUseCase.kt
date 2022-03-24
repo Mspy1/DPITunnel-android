@@ -13,9 +13,10 @@ class FetchProfileUseCase(private val context: Context): IFetchProfileUseCase {
     private val profileDao = AppDatabase.getInstance(context).profileDao()
     private val appPreferences = AppPreferences.getInstance(context)
 
-    override suspend fun fetch(id: Int): Profile? = profileDao.findById(id)?.let { profile ->
+    override suspend fun fetch(id: Long): Profile? = profileDao.findById(id)?.let { profile ->
         Profile(
             id = profile.id,
+            enabled = profile.enabled,
             name = profile.name,
             title = profile.title,
             bufferSize = profile.bufferSize,

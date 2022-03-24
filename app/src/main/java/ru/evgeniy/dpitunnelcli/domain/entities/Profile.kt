@@ -14,7 +14,8 @@ enum class DesyncFirstAttack {
 }
 
 data class Profile(
-    var id: Int?,
+    var id: Long?,
+    var enabled: Boolean,
     var name: String,
     var title: String?,
     var bufferSize: Int?,

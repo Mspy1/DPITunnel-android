@@ -22,13 +22,15 @@
     <string name="button_restart">перезапуск</string>
     <!-- Dashboard fragment messages -->
     <string name="no_one_profile_failed">Ошибка! Добавьте хотя бы один профиль!</string>
+    <string name="empty_profile_name_failed">Ошибка! Пустой ID профиля</string>
 
     <!-- Profiles fragment -->
     <string name="unnamed_profile_name">Безымянный</string>
     <string name="default_profile_mark"> (По умолчанию)</string>
-    <string name="profile_item_menu_default">По умолчанию</string>
     <string name="profile_item_menu_rename">Переименовать</string>
     <string name="profile_item_menu_delete">Удалить</string>
+    <string name="profile_item_menu_default">По умолчанию</string>
+    <string name="profile_item_menu_enabled">Использовать</string>
     <string name="dialog_profile_rename_positive">ОК</string>
     <string name="dialog_profile_rename_negative">Отмена</string>
     <string name="dialog_profile_rename_title">Переименование профиля</string>
@@ -38,8 +40,9 @@
     <string name="rename_edit_profile_toolbar">Переименовать</string>
     <!-- Profile id card -->
     <string name="title_profile_id_card">ID профиля</string>
+    <string name="desc_default_profile_id_card">По умолчанию</string>
     <string name="desc_profile_id_card">Сетевой интерфейс/Wi-Fi сеть</string>
-    <string name="hint_profile_id_card">&lt;net_iface&gt;[:&lt;wifi_net&gt;]|default</string>
+    <string name="hint_profile_id_card">&lt;net_iface&gt;[:&lt;wifi_net&gt;]</string>
     <string name="button_profile_id_card">Установить из текущего подключения</string>
     <!-- Desync attacks card -->
     <string name="title_desync_attacks_card">Атаки десинхронизации</string>
@@ -92,7 +95,7 @@
     <!-- Edit profile activity messages -->
     <string name="location_permission_failed">Ошибка! Разрешите доступ к геолокации для получения сетевых настроек</string>
     <string name="location_disabled_failed">Ошибка! Включите геолокацию в настройках устройства</string>
-    <string name="invalid_profile_id_failed">Ошибка! ID профиля не может быть пустым</string>
+    <string name="invalid_profile_id_failed">Ошибка! ID профиля не может быть пустым или \'default\'</string>
     <string name="no_working_attacks_found">Ошибка! Не удалось подобрать настройки</string>
     <string name="resolve_domain_failed">Ошибка! Не удалось разрешить адрес сайта. Проверьте адрес сайта</string>
     <string name="config_parse_failed">Ошибка! Не удалось разобрать вывод программы. Свяжитесь с разработчиком</string>

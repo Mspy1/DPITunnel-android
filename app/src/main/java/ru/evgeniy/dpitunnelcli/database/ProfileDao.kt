@@ -12,25 +12,30 @@ interface ProfileDao {
     fun getAllLive(): LiveData<List<Profile>>
 
     @Query("SELECT * FROM profiles_table WHERE id = :id")
-    suspend fun findById(id: Int): Profile?
+    suspend fun findById(id: Long): Profile?
 
     @Insert
-    suspend fun insertProfile(profile: Profile)
+    suspend fun insertProfile(profile: Profile): Long
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
     suspend fun update(profile: Profile)
 
     @Query("UPDATE profiles_table SET title = :newTitle WHERE id = :id")
-    suspend fun rename(id: Int, newTitle: String)
+    suspend fun rename(id: Long, newTitle: String)
+
+    @Query("UPDATE profiles_table SET enabled = :enabled WHERE id = :id")
+    suspend fun setEnable(id: Long, enabled: Boolean)
 
     @Query("DELETE FROM profiles_table WHERE id = :id")
-    suspend fun delete(id: Int)
+    suspend fun delete(id: Long)
 
-    suspend fun insertOrUpdate(profile: Profile) {
+    suspend fun insertOrUpdate(profile: Profile): Long {
         val profileFromDB = profile.id?.let { findById(it) }
-        if (profileFromDB == null)
+        return if (profileFromDB == null) {
             insertProfile(profile)
-        else
+        } else {
             update(profile)
+            profile.id
+        }
     }
 }

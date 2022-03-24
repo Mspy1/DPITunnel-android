@@ -8,17 +8,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import ru.evgeniy.dpitunnelcli.R
-import ru.evgeniy.dpitunnelcli.data.usecases.DeleteProfileUseCase
+import ru.evgeniy.dpitunnelcli.data.usecases.*
 import ru.evgeniy.dpitunnelcli.ui.activity.editProfile.EditProfileActivity
-import ru.evgeniy.dpitunnelcli.data.usecases.FetchAllProfilesUseCase
-import ru.evgeniy.dpitunnelcli.data.usecases.RenameProfileUseCase
-import ru.evgeniy.dpitunnelcli.data.usecases.SettingsUseCase
 import ru.evgeniy.dpitunnelcli.databinding.FragmentProfilesBinding
 
 class ProfilesFragment : Fragment() {
@@ -32,9 +30,11 @@ class ProfilesFragment : Fragment() {
     private val profilesViewModel by viewModels<ProfilesViewModel> {
         ProfilesViewModelFactory(
             fetchAllProfilesUseCase = FetchAllProfilesUseCase(requireContext().applicationContext),
+            fetchProfileUseCase = FetchProfileUseCase(requireContext().applicationContext),
             deleteProfileUseCase = DeleteProfileUseCase(requireContext().applicationContext),
             renameProfileUseCase = RenameProfileUseCase(requireContext().applicationContext),
-            settingsUseCase = SettingsUseCase(requireContext().applicationContext)
+            settingsUseCase = SettingsUseCase(requireContext().applicationContext),
+            enableDisableProfileUseCase = EnableDisableProfileUseCase(requireContext().applicationContext)
         )
     }
 
@@ -77,6 +77,9 @@ class ProfilesFragment : Fragment() {
             },
             profileDefaultListener = {
                 profilesViewModel.setDefaultProfile(it.id!!)
+            },
+            profileEnabledListener = {
+                profilesViewModel.enableDisable(it.id!!)
             }
         )
 
@@ -85,13 +88,26 @@ class ProfilesFragment : Fragment() {
             LinearLayoutManager.VERTICAL, false
         )
 
+        profilesViewModel.uiState.observe(viewLifecycleOwner) { state ->
+            when(state) {
+                is ProfilesViewModel.UIState.Normal -> {}
+                is ProfilesViewModel.UIState.Error -> {
+                    when(state.error) {
+                        ProfilesViewModel.UIErrorType.ERROR_PROFILE_NAME_EMPTY -> {
+                            Toast.makeText(requireContext(), R.string.empty_profile_name_failed, Toast.LENGTH_LONG).show()
+                        }
+                    }
+                }
+            }
+        }
+
         profilesViewModel.profiles.observe(viewLifecycleOwner) {
             (binding.profilesRecycler.adapter as ProfilesAdapter).bindProfiles(it)
         }
 
         binding.profilesAddProfileButton.setOnClickListener {
             resultLauncher.launch(Intent(context, EditProfileActivity::class.java)
-                .putExtra(EditProfileActivity.PROFILE_ID_KEY, 0))
+                .putExtra(EditProfileActivity.PROFILE_ID_KEY, 0L))
         }
     }
 

@@ -11,9 +11,9 @@ class SettingsUseCase(private val context: Context): ISettingsUseCase {
     override fun getCABundlePath() = appPreferences.caBundlePath
     override fun getIP(): String? = appPreferences.ip
     override fun getPort(): Int? = appPreferences.port
-    override fun getDefaultProfileId(): Int? = appPreferences.defaultProfileId
+    override fun getDefaultProfileId(): Long? = appPreferences.defaultProfileId
 
-    override fun setDefaultProfileId(value: Int?) {
+    override fun setDefaultProfileId(value: Long?) {
         appPreferences.defaultProfileId = value
     }
 }

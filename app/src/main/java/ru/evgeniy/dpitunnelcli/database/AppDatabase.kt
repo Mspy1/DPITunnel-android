@@ -10,7 +10,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-@Database(entities = [Profile::class], version = 1)
+@Database(entities = [Profile::class], version = 2)
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun profileDao(): ProfileDao
@@ -46,6 +46,7 @@ abstract class AppDatabase : RoomDatabase() {
             db.profileDao().insertProfile(
                 Profile(
                     id = null,
+                    enabled = true,
                     name = "default",
                     title = "Auto TTL universal",
                     bufferSize = null,

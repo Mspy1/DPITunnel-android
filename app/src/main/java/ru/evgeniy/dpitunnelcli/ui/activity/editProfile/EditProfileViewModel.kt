@@ -24,7 +24,9 @@ class EditProfileViewModel(private val fetchDefaultIfaceWifiAPUseCase: IFetchDef
 
     private var _profileCurrentUnmodified: Profile? = null
     val isModified: Boolean
-        get() = _profileCurrent != _profileCurrentUnmodified
+        get() {
+            return _profileCurrent != _profileCurrentUnmodified
+        }
     private var _profileCurrent: Profile? = null
         @Synchronized
         get() = field
@@ -57,6 +59,14 @@ class EditProfileViewModel(private val fetchDefaultIfaceWifiAPUseCase: IFetchDef
             }
         }
 
+    var default: Boolean
+        get() = false
+        set(value) {
+            _profileCurrent?.let {
+                it.default = value
+                _profileCurrent = _profileCurrent
+            }
+        }
     var profileId: String
         get() = ""
         set(value) {
@@ -203,7 +213,7 @@ class EditProfileViewModel(private val fetchDefaultIfaceWifiAPUseCase: IFetchDef
     fun save() {
         _profileCurrent?.let {
             viewModelScope.launch(Dispatchers.IO) {
-                if (it.name.isBlank()) {
+                if (!it.default && (it.name.isBlank() || it.name == DEFAULT_PROFILE_ID)) {
                     _uiState.postValue(UIState.Error(UIErrorType.ERROR_INVALID_PROFILE_ID))
                     return@launch
                 }
@@ -261,9 +271,9 @@ class EditProfileViewModel(private val fetchDefaultIfaceWifiAPUseCase: IFetchDef
         _showLog.value = isShow
     }
 
-    fun loadProfile(id: Int) {
+    fun loadProfile(id: Long) {
         viewModelScope.launch(Dispatchers.IO) {
-            if (id == 0)
+            if (id == 0L)
                 loadProfile(null as Profile?)
             else
                 loadProfile(fetchProfileUseCase.fetch(id))
@@ -326,5 +336,6 @@ class EditProfileViewModel(private val fetchDefaultIfaceWifiAPUseCase: IFetchDef
 
     companion object {
         private const val RMNET_IFACE_NAME = "rmnet"
+        private const val DEFAULT_PROFILE_ID = "default"
     }
 }

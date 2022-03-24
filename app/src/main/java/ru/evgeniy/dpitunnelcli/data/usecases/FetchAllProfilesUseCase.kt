@@ -35,6 +35,7 @@ class FetchAllProfilesUseCase(private val context: Context): IFetchAllProfilesUs
                 defaultExist = true
             newList += Profile(
                 id = profile.id,
+                enabled = profile.enabled,
                 name = profile.name,
                 title = profile.title,
                 bufferSize = profile.bufferSize,
@@ -55,6 +56,10 @@ class FetchAllProfilesUseCase(private val context: Context): IFetchAllProfilesUs
                 desyncFirstAttack = profile.desyncFirstAttack?.ordinal?.let { DesyncFirstAttack.values()[it] },
                 default = profile.id == defaultProfileId
             )
+        }
+        newList.sortWith { lhs, rhs ->
+            // -1 - less than, 1 - greater than, 0 - equal
+            if (lhs.default) -1 else if (lhs.enabled && !rhs.default) -1 else 1
         }
 
         if (!defaultExist) {
