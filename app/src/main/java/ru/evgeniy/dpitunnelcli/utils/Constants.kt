@@ -17,7 +17,7 @@ object Constants {
     const val USER_CA_BUNDLE_FILE_NAME = "ca.bundle_user"
     val DEFAULT_PROFILE = Profile(
         id = null,
-        enabled = true,
+        enabled = false,
         name = "",
         title = null,
         bufferSize = null,

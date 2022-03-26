@@ -63,6 +63,8 @@ class EditProfileViewModel(private val fetchDefaultIfaceWifiAPUseCase: IFetchDef
         get() = false
         set(value) {
             _profileCurrent?.let {
+                if (value && it.name == DEFAULT_PROFILE_ID)
+                    it.name = ""
                 it.default = value
                 _profileCurrent = _profileCurrent
             }
@@ -71,6 +73,7 @@ class EditProfileViewModel(private val fetchDefaultIfaceWifiAPUseCase: IFetchDef
         get() = ""
         set(value) {
             _profileCurrent?.let {
+                it.enabled = value.isNotBlank()
                 it.name = value
             }
         }

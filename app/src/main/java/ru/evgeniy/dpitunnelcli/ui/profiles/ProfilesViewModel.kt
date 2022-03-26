@@ -40,10 +40,8 @@ class ProfilesViewModel(private val fetchAllProfilesUseCase: IFetchAllProfilesUs
 
     fun setDefaultProfile(id: Long) {
         viewModelScope.launch(Dispatchers.IO) {
-            settingsUseCase.getDefaultProfileId()
-                ?.let { oldId -> fetchProfileUseCase.fetch(oldId)?.name?.ifBlank { enableDisableProfileUseCase.disable(oldId) } }
             settingsUseCase.setDefaultProfileId(id)
-            enableDisableProfileUseCase.enable(id)
+            _profiles.postValue(fetchAllProfilesUseCase.fetch())
         }
     }
 
