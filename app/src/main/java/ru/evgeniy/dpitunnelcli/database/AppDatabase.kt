@@ -46,8 +46,32 @@ abstract class AppDatabase : RoomDatabase() {
             db.profileDao().insertProfile(
                 Profile(
                     id = null,
-                    enabled = true,
-                    name = "default",
+                    enabled = false,
+                    name = "",
+                    title = "Wrong SEQ universal",
+                    bufferSize = null,
+                    splitPosition = 3,
+                    splitAtSni = true,
+                    wrongSeq = true,
+                    autoTtl = false,
+                    fakePacketsTtl = null,
+                    windowSize = 1,
+                    windowScaleFactor = 6,
+                    inBuiltDNS = true,
+                    inBuiltDNSIP = "8.8.8.8",
+                    inBuiltDNSPort = null,
+                    doh = true,
+                    dohServer = "https://dns.google/dns-query",
+                    desyncAttacks = true,
+                    desyncZeroAttack = DesyncZeroAttack.DESYNC_ZERO_FAKE,
+                    desyncFirstAttack = DesyncFirstAttack.DESYNC_FIRST_DISORDER_FAKE
+                )
+            )
+            db.profileDao().insertProfile(
+                Profile(
+                    id = null,
+                    enabled = false,
+                    name = "",
                     title = "Auto TTL universal",
                     bufferSize = null,
                     splitPosition = 3,
