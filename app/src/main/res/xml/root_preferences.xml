@@ -26,6 +26,13 @@
 
     <PreferenceCategory app:title="@string/preference_category_server">
 
+        <SwitchPreferenceCompat
+            app:key="preference_proxy_system_wide"
+            app:defaultValue="true"
+            app:singleLineTitle="false"
+            app:title="@string/preference_proxy_system_wide_title"
+            app:summary="@string/preference_proxy_system_wide_summary" />
+
         <EditTextPreference
             app:key="preference_proxy_ip"
             app:defaultValue="127.0.0.1"

@@ -9,6 +9,7 @@ class SettingsUseCase(private val context: Context): ISettingsUseCase {
 
     override fun getStartOnBoot(): Boolean = appPreferences.startOnBoot
     override fun getCABundlePath() = appPreferences.caBundlePath
+    override fun getSystemWide(): Boolean = appPreferences.systemWide
     override fun getIP(): String? = appPreferences.ip
     override fun getPort(): Int? = appPreferences.port
     override fun getDefaultProfileId(): Long? = appPreferences.defaultProfileId

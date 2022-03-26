@@ -112,6 +112,8 @@
     <string name="preference_ca_bundle_path_title">Import CA Bundle</string>
     <!-- Proxy -->
     <string name="preference_category_server">Proxy</string>
+    <string name="preference_proxy_system_wide_title">System wide proxy</string>
+    <string name="preference_proxy_system_wide_summary">DPITunnel proxy for all system. Disable if you want to make proxy chains</string>
     <string name="preference_proxy_ip_title">Proxy IP</string>
     <string name="preference_proxy_ip_summary">IP to bind proxy. Ex. 127.0.0.1</string>
     <string name="preference_proxy_port_title">Proxy port</string>

@@ -111,6 +111,8 @@
     <string name="preference_ca_bundle_path_title">Импортировать CA Bundle</string>
     <!-- Proxy -->
     <string name="preference_category_server">Прокси</string>
+    <string name="preference_proxy_system_wide_title">Общесистемные прокси</string>
+    <string name="preference_proxy_system_wide_summary">Устанавливает прокси для всей системы. Выключите, если хотите создавать цепочки прокси</string>
     <string name="preference_proxy_ip_title">IP прокси</string>
     <string name="preference_proxy_ip_summary">IP для запуска прокси сервера. Пр. 127.0.0.1</string>
     <string name="preference_proxy_port_title">Порт прокси</string>

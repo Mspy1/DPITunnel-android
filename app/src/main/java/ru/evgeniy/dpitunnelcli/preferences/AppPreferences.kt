@@ -21,6 +21,9 @@ class AppPreferences private  constructor() {
         }
         get() = sharedPreferences.getString(CA_BUNDLE_PROPERTY_NAME, "")?.ifEmpty { null }
 
+    val systemWide: Boolean
+        get() = sharedPreferences.getBoolean(SYSTEM_WIDE_PROXY_PROPERTY_NAME, false)
+
     val ip: String?
         get() = sharedPreferences.getString(IP_PROPERTY_NAME, "")?.ifEmpty { null }
 
@@ -50,6 +53,7 @@ class AppPreferences private  constructor() {
         const val SETTINGS_STORAGE_NAME = "PERSISTENT_SETTINGS"
         private const val START_ON_BOOT_PROPERTY_NAME = "preference_start_on_boot"
         private const val CA_BUNDLE_PROPERTY_NAME = "preference_ca_bundle_path"
+        private const val SYSTEM_WIDE_PROXY_PROPERTY_NAME = "preference_proxy_system_wide"
         private const val IP_PROPERTY_NAME = "preference_proxy_ip"
         private const val PORT_PROPERTY_NAME = "preference_proxy_port"
         private const val FIRST_RUN_PROPERTY_NAME = "first_run"
