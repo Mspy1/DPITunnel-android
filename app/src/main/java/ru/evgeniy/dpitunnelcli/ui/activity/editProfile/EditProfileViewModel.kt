@@ -192,12 +192,14 @@ class EditProfileViewModel(private val fetchDefaultIfaceWifiAPUseCase: IFetchDef
                                 _autoconfigState.postValue(AutoconfigState.Error(AutoconfigErrorType.ERROR_NO_ATTACKS_FOUND))
                             AutoConfigOutputFilter.ErrorType.ERROR_RESOLVE_DOMAIN_FAILED ->
                                 _autoconfigState.postValue(AutoconfigState.Error(AutoconfigErrorType.ERROR_RESOLVE_DOMAIN_FAILED))
+                            AutoConfigOutputFilter.ErrorType.ERROR_CALCULATE_HOPS_FAILED ->
+                                _autoconfigState.postValue(AutoconfigState.Error(AutoconfigErrorType.ERROR_CALCULATE_HOPS_FAILED))
                             AutoConfigOutputFilter.ErrorType.ERROR_CONFIG_PARSE_FAILED ->
                                 _autoconfigState.postValue(AutoconfigState.Error(AutoconfigErrorType.ERROR_CONFIG_PARSE_FAILED))
                         }
                     }
                     is AutoConfigOutputFilter.ConfiguredProfileState.InProcess -> {
-                        _autoconfigState.postValue(AutoconfigState.Running(100 * state.progress.ordinal / AutoConfigOutputFilter.Progress.values().size))
+                        _autoconfigState.postValue(AutoconfigState.Running(state.progress))
                     }
                     is AutoConfigOutputFilter.ConfiguredProfileState.Stopped -> {
                         _autoconfigState.postValue(AutoconfigState.Stopped)
@@ -301,6 +303,7 @@ class EditProfileViewModel(private val fetchDefaultIfaceWifiAPUseCase: IFetchDef
     private fun loadConfiguredProfile(configuredProfile: ConfiguredProfile) {
         _profileCurrent?.let {
             val profile = it
+            profile.splitAtSni = configuredProfile.splitAtSni
             profile.wrongSeq = configuredProfile.wrongSeq
             profile.autoTtl = configuredProfile.autoTtl
             profile.fakePacketsTtl = configuredProfile.fakePacketsTtl
@@ -316,6 +319,7 @@ class EditProfileViewModel(private val fetchDefaultIfaceWifiAPUseCase: IFetchDef
     enum class AutoconfigErrorType {
         ERROR_NO_ATTACKS_FOUND,
         ERROR_RESOLVE_DOMAIN_FAILED,
+        ERROR_CALCULATE_HOPS_FAILED,
         ERROR_CONFIG_PARSE_FAILED,
         ERROR_EXCEPTION
     }

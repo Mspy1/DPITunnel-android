@@ -98,6 +98,7 @@
     <string name="invalid_profile_id_failed">Ошибка! ID профиля не может быть пустым или \'default\'</string>
     <string name="no_working_attacks_found">Ошибка! Не удалось подобрать настройки</string>
     <string name="resolve_domain_failed">Ошибка! Не удалось разрешить адрес сайта. Проверьте адрес сайта</string>
+    <string name="calculate_hops_failed">Ошибка! Не удалось рассчитать число hop до сайта. Попробуйте ещё раз</string>
     <string name="config_parse_failed">Ошибка! Не удалось разобрать вывод программы. Свяжитесь с разработчиком</string>
     <string name="profile_successfully_configured">Настройки успешно подобраны</string>
 

@@ -292,6 +292,9 @@ class EditProfileActivity : AppCompatActivity() {
                         EditProfileViewModel.AutoconfigErrorType.ERROR_RESOLVE_DOMAIN_FAILED -> {
                             Toast.makeText(this, R.string.resolve_domain_failed, Toast.LENGTH_LONG).show()
                         }
+                        EditProfileViewModel.AutoconfigErrorType.ERROR_CALCULATE_HOPS_FAILED -> {
+                            Toast.makeText(this, R.string.calculate_hops_failed, Toast.LENGTH_LONG).show()
+                        }
                         EditProfileViewModel.AutoconfigErrorType.ERROR_CONFIG_PARSE_FAILED -> {
                             Toast.makeText(this, R.string.config_parse_failed, Toast.LENGTH_LONG).show()
                         }

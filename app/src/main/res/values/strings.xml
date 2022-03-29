@@ -99,6 +99,7 @@
     <string name="invalid_profile_id_failed">Fail! Profile id can\'t be empty or \'default\'</string>
     <string name="no_working_attacks_found">Fail! No working attack found</string>
     <string name="resolve_domain_failed">Fail! Resolve domain failed. Is website address correct?</string>
+    <string name="calculate_hops_failed">Fail! Failed to measure hops. Try again</string>
     <string name="config_parse_failed">Fail! Failed to parse output of binary. Contact developer</string>
     <string name="profile_successfully_configured">Success! Profile configured</string>
 
